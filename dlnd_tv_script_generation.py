@@ -563,9 +563,9 @@ def train_rnn(rnn, batch_size, optimizer, criterion, n_epochs, show_every_n_batc
 
 # Data params
 # Sequence Length
-sequence_length =128   # of words in a sequence
+sequence_length =30   # of words in a sequence
 # Batch Size
-batch_size = 100
+batch_size = 500
 
 # data loader - do not change
 train_loader = batch_data(int_text, sequence_length, batch_size)
@@ -576,24 +576,24 @@ train_loader = batch_data(int_text, sequence_length, batch_size)
 
 # Training parameters
 # Number of Epochs
-num_epochs = 1
+num_epochs = 10
 # Learning Rate
-learning_rate = 0.01
+learning_rate = 0.001
 
 # Model parameters
 # Vocab size
-vocab_size = 1000
+vocab_size = len(vocab_to_int)
 # Output size
-output_size = 83
+output_size = vocab_size
 # Embedding Dimension
-embedding_dim = 300
+embedding_dim = 250
 # Hidden Dimension
-hidden_dim = 300
+hidden_dim = 500
 # Number of RNN Layers
-n_layers = 2
+n_layers = 3
 
 # Show stats for every n number of batches
-show_every_n_batches = 500
+show_every_n_batches = 50
 
 
 # ### Train
@@ -602,7 +602,7 @@ show_every_n_batches = 500
 # 
 # You should also experiment with different sequence lengths, which determine the size of the long range dependencies that a model can learn.
 
-# In[15]:
+# In[ ]:
 
 
 """
@@ -630,6 +630,17 @@ print('Model Trained and Saved')
 # For example, did you try different sequence_lengths and find that one size made the model converge faster? What about your hidden_dim and n_layers; how did you decide on those?
 
 # **Answer:** (Write answer, here)
+# when i put 
+# vocab_size equal len(vocab_to_int)
+# 
+# hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy
+# 
+# n_layers i use 3 layers as will outperform a tow layer net ( if number layers less it much fuster expet CNN)
+# 
+#  i encrease sequence_length for fasting the tratinig
+#  and decrease bach size for fasting the tratinig
+#  i decrease learning rate for more eccuracy
+#  
 
 # ---
 # # Checkpoint
