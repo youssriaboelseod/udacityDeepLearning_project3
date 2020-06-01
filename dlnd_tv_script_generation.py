@@ -386,14 +386,11 @@ class RNN(nn.Module):
         
         r_output, hidden = self.lstm(embeds, hidden)##  Get the outputs and the new hidden state from the lstm
         
-        out = self.dropout(r_output)##  pass through a dropout layer
-
-        out = out.contiguous().view(-1, self.hidden_dim )# Stack up LSTM outputs using view# you may need to use contiguous to reshape the output
-        
+        out = r_output.contiguous().view(-1, self.hidden_dim )# Stack up LSTM outputs using view# you may need to use contiguous to reshape the output
         sig_out = self.fc(out)##  put x(input) through the fully-connected layer
         
         # reshape into (batch_size, seq_length, output_size)
-
+        #sig_out = out.view(batch_size, -1, self.output_size)
         sig_out = sig_out.view(batch_size, -1, self.output_size)
         sig_out = sig_out[:, -1] # get last batch of labels
         # return one batch of output(y) word scores and the hidden state
@@ -462,7 +459,6 @@ def forward_back_prop(rnn, optimizer, criterion, inp, target, hidden):
     # Creating new variables for the hidden state, otherwise
     # we'd backprop through the entire training history
     
-
     h = tuple([each.data for each in hidden])
         
     # zero accumulated gradients
@@ -474,8 +470,7 @@ def forward_back_prop(rnn, optimizer, criterion, inp, target, hidden):
     # calculate the loss and perform backprop
     loss = criterion(output, target)
     loss.backward()
-    #optimizer = optim.Adam(model.parameters(), lr=0.003)
-    
+    #optimizer = torch.optim.Adam(rnn.parameters(), lr=0.003)
     
     optimizer.step()
     #to convert input to tensor
@@ -563,9 +558,9 @@ def train_rnn(rnn, batch_size, optimizer, criterion, n_epochs, show_every_n_batc
 
 # Data params
 # Sequence Length
-sequence_length =30   # of words in a sequence
+sequence_length =10   # of words in a sequence
 # Batch Size
-batch_size = 500
+batch_size = 200
 
 # data loader - do not change
 train_loader = batch_data(int_text, sequence_length, batch_size)
@@ -576,7 +571,7 @@ train_loader = batch_data(int_text, sequence_length, batch_size)
 
 # Training parameters
 # Number of Epochs
-num_epochs = 10
+num_epochs = 5
 # Learning Rate
 learning_rate = 0.001
 
@@ -586,14 +581,14 @@ vocab_size = len(vocab_to_int)
 # Output size
 output_size = vocab_size
 # Embedding Dimension
-embedding_dim = 250
+embedding_dim = 150
 # Hidden Dimension
-hidden_dim = 500
+hidden_dim = 300
 # Number of RNN Layers
 n_layers = 3
 
 # Show stats for every n number of batches
-show_every_n_batches = 50
+show_every_n_batches = 500
 
 
 # ### Train
@@ -602,7 +597,7 @@ show_every_n_batches = 50
 # 
 # You should also experiment with different sequence lengths, which determine the size of the long range dependencies that a model can learn.
 
-# In[ ]:
+# In[15]:
 
 
 """
@@ -633,13 +628,13 @@ print('Model Trained and Saved')
 # when i put 
 # vocab_size equal len(vocab_to_int)
 # 
-# hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy
+# hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy but not too much for not overfitting.
 # 
 # n_layers i use 3 layers as will outperform a tow layer net ( if number layers less it much fuster expet CNN)
 # 
-#  i encrease sequence_length for fasting the tratinig
-#  and decrease bach size for fasting the tratinig
-#  i decrease learning rate for more eccuracy
+#  sequence_length : i reduce  for fasting the tratinig
+#  bach size: reduceing for reduce loss and raise accuracy
+#  i increase learning rate for more eccuracy
 #  
 
 # ---
@@ -647,7 +642,7 @@ print('Model Trained and Saved')
 # 
 # After running the above training cell, your model will be saved by name, `trained_rnn`, and if you save your notebook progress, **you can pause here and come back to this code at another time**. You can resume your progress by running the next cell, which will load in our word:id dictionaries _and_ load in your saved model by name!
 
-# In[ ]:
+# In[16]:
 
 
 """
@@ -667,7 +662,7 @@ trained_rnn = helper.load_model('./save/trained_rnn')
 # ### Generate Text
 # To generate the text, the network needs to start with a single word and repeat its predictions until it reaches a set length. You'll be using the `generate` function to do this. It takes a word id to start with, `prime_id`, and generates a set length of text, `predict_len`. Also note that it uses topk sampling to introduce some randomness in choosing the most likely next word, given an output set of word scores!
 
-# In[ ]:
+# In[17]:
 
 
 """
@@ -749,7 +744,7 @@ def generate(rnn, prime_id, int_to_vocab, token_dict, pad_value, predict_len=100
 # 
 # You can set the prime word to _any word_ in our dictionary, but it's best to start with a name for generating a TV script. (You can also start with any other names you find in the original text file!)
 
-# In[ ]:
+# In[18]:
 
 
 # run the cell multiple times to get different results!
@@ -768,7 +763,7 @@ print(generated_script)
 # 
 # Once you have a script that you like (or find interesting), save it to a text file!
 
-# In[ ]:
+# In[19]:
 
 
 # save script to a text file

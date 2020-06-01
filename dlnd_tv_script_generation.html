@@ -13576,7 +13576,7 @@ sequence_length = 4</code></pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;torch.utils.data.dataloader.DataLoader at 0x7f6b02ec0278&gt;</pre>
+<pre>&lt;torch.utils.data.dataloader.DataLoader at 0x7fa628716208&gt;</pre>
 </div>
 
 </div>
@@ -13988,7 +13988,7 @@ out = output[:, -1]</code></pre>
 <span class="c1"># Sequence Length</span>
 <span class="n">sequence_length</span> <span class="o">=</span><span class="mi">10</span>   <span class="c1"># of words in a sequence</span>
 <span class="c1"># Batch Size</span>
-<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">250</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">200</span>
 
 <span class="c1"># data loader - do not change</span>
 <span class="n">train_loader</span> <span class="o">=</span> <span class="n">batch_data</span><span class="p">(</span><span class="n">int_text</span><span class="p">,</span> <span class="n">sequence_length</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">)</span>
@@ -14006,9 +14006,9 @@ out = output[:, -1]</code></pre>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Training parameters</span>
 <span class="c1"># Number of Epochs</span>
-<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="c1"># Learning Rate</span>
-<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
 
 <span class="c1"># Model parameters</span>
 <span class="c1"># Vocab size</span>
@@ -14016,9 +14016,9 @@ out = output[:, -1]</code></pre>
 <span class="c1"># Output size</span>
 <span class="n">output_size</span> <span class="o">=</span> <span class="n">vocab_size</span>
 <span class="c1"># Embedding Dimension</span>
-<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">150</span>
 <span class="c1"># Hidden Dimension</span>
-<span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="c1"># Number of RNN Layers</span>
 <span class="n">n_layers</span> <span class="o">=</span> <span class="mi">3</span>
 
@@ -14044,7 +14044,7 @@ out = output[:, -1]</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -14082,13 +14082,110 @@ out = output[:, -1]</code></pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training for 2 epoch(s)...
-Epoch:    1/2     Loss: 6.708839867591858
+<pre>Training for 5 epoch(s)...
+Epoch:    1/5     Loss: 5.909010098457337
 
-Epoch:    1/2     Loss: 6.93478240776062
+Epoch:    1/5     Loss: 5.713744568824768
 
-Epoch:    1/2     Loss: 7.141432208061218
+Epoch:    1/5     Loss: 5.726746096611023
 
+Epoch:    1/5     Loss: 5.808293230056763
+
+Epoch:    1/5     Loss: 5.799638630867005
+
+Epoch:    1/5     Loss: 5.714971304893494
+
+Epoch:    1/5     Loss: 5.241669043540955
+
+Epoch:    1/5     Loss: 4.845693409919739
+
+Epoch:    2/5     Loss: 4.555456062903007
+
+Epoch:    2/5     Loss: 4.314826137542725
+
+Epoch:    2/5     Loss: 4.274606697082519
+
+Epoch:    2/5     Loss: 4.32646410036087
+
+Epoch:    2/5     Loss: 4.23208572101593
+
+Epoch:    2/5     Loss: 4.1392346606254575
+
+Epoch:    2/5     Loss: 4.109307557582855
+
+Epoch:    2/5     Loss: 4.145636974334717
+
+Epoch:    3/5     Loss: 4.05927559658885
+
+Epoch:    3/5     Loss: 3.926067983150482
+
+Epoch:    3/5     Loss: 3.940105939388275
+
+Epoch:    3/5     Loss: 3.9904336614608766
+
+Epoch:    3/5     Loss: 3.912653787612915
+
+Epoch:    3/5     Loss: 3.8662094745635986
+
+Epoch:    3/5     Loss: 3.8421410012245176
+
+Epoch:    3/5     Loss: 3.896957486629486
+
+Epoch:    4/5     Loss: 3.8305867622296015
+
+Epoch:    4/5     Loss: 3.724542489528656
+
+Epoch:    4/5     Loss: 3.7293193969726564
+
+Epoch:    4/5     Loss: 3.785373023509979
+
+Epoch:    4/5     Loss: 3.7223036384582517
+
+Epoch:    4/5     Loss: 3.665317533493042
+
+Epoch:    4/5     Loss: 3.6717511157989504
+
+Epoch:    4/5     Loss: 3.714954087734222
+
+Epoch:    5/5     Loss: 3.6699884831905365
+
+Epoch:    5/5     Loss: 3.5794230318069458
+
+Epoch:    5/5     Loss: 3.584567624568939
+
+Epoch:    5/5     Loss: 3.6417084407806395
+
+Epoch:    5/5     Loss: 3.583541358470917
+
+Epoch:    5/5     Loss: 3.5343609805107117
+
+Epoch:    5/5     Loss: 3.5404547777175903
+
+Epoch:    5/5     Loss: 3.589859797000885
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.6/site-packages/torch/serialization.py:193: UserWarning: Couldn&#39;t retrieve source code for container of type RNN. It won&#39;t be checked for correctness upon loading.
+  &#34;type &#34; + obj.__name__ + &#34;. It won&#39;t be checked &#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Model Trained and Saved
 </pre>
 </div>
 </div>
@@ -14111,11 +14208,11 @@ Epoch:    1/2     Loss: 7.141432208061218
 <p><strong>Answer:</strong> (Write answer, here)
 when i put 
 vocab_size equal len(vocab_to_int)</p>
-<p>hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy</p>
+<p>hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy but not too much for not overfitting.</p>
 <p>n_layers i use 3 layers as will outperform a tow layer net ( if number layers less it much fuster expet CNN)</p>
-<p>i reduce  sequence_length for fasting the tratinig
- and decrease bach size for fasting the tratinig
- i decrease learning rate for more eccuracy</p>
+<p>sequence_length : i reduce  for fasting the tratinig
+ bach size: reduceing for reduce loss and raise accuracy
+ i increase learning rate for more eccuracy</p>
 
 </div>
 </div>
@@ -14131,7 +14228,7 @@ vocab_size equal len(vocab_to_int)</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -14161,7 +14258,7 @@ vocab_size equal len(vocab_to_int)</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
@@ -14256,7 +14353,7 @@ vocab_size equal len(vocab_to_int)</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># run the cell multiple times to get different results!</span>
@@ -14275,6 +14372,101 @@ vocab_size equal len(vocab_to_int)</p>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/opt/conda/lib/python3.6/site-packages/ipykernel_launcher.py:48: UserWarning: RNN module weights are not part of single contiguous chunk of memory. This means they need to be compacted at every call, possibly greatly increasing memory usage. To compact weights again call flatten_parameters().
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>jerry: the network of the manner. i think you were a little contractor.
+
+hoyt: so what?
+
+jerry: i think it&#39;s the way of the defendants.
+
+jerry: you were a little good, and you could be in that courtroom.
+
+george: so you were in the plane, i don&#39;t have any trouble.
+
+hoyt: well, you can get the money.
+
+jerry: i can&#39;t have to get it in the street, and i was going on to get a whole one. i mean, you can be a little festive and a little good?
+
+jerry: no no, i can&#39;t get out with that.
+
+hoyt: i was in the bathroom!
+
+george: so what did i do?
+
+george: i told you, i think it&#39;s the same time.
+
+chiles: i think we were the good time.
+
+george: what happened, i can&#39;t go anywhere, and the whole one would be a man of the time.
+
+chiles: oh, yeah.
+
+hoyt: so?
+
+elaine: i know. i got it in that courtroom.
+
+hoyt: so, you know, i can&#39;t get that.
+
+elaine: you know how you&#39;re going to do?
+
+jerry: no, it&#39;s a good thing i was a little adjustment.
+
+hoyt: what?
+
+george: i think it&#39;s effeminate.
+
+jerry: you know, i have to be a little adjustment about this courtroom.
+
+hoyt: what did you want to do?
+
+hoyt: i don&#39;t care.
+
+elaine: oh, that&#39;s right.
+
+hoyt: what are we doing here?
+
+hoyt: what?
+
+jerry: i told you about the defendants.
+
+george: you know, i was going to get the whole time in the phone.
+
+hoyt: i think it would be a good one.
+
+[new witness: the coffee shop]
+
+hoyt: yes, i think i can get out of that courtroom.
+
+jerry: so, what is this?
+
+elaine:
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -14286,7 +14478,7 @@ vocab_size equal len(vocab_to_int)</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># save script to a text file</span>
