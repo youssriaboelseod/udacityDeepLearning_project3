@@ -359,7 +359,7 @@ class RNN(nn.Module):
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
         self.lstm = nn.LSTM(embedding_dim, hidden_dim, n_layers, 
                             dropout=dropout, batch_first=True)
-        self.dropout = nn.Dropout(0.3)        # dropout layer
+        #self.dropout = nn.Dropout(0.3)        # dropout layer
 
         # set class variables
         #self.chars = vocab_size
@@ -367,7 +367,7 @@ class RNN(nn.Module):
         #self.char2int = {ch: ii for ii, ch in self.int2char.items()}
         # define model layers
         self.fc = nn.Linear(hidden_dim, output_size)        # linear 
-        self.sig = nn.Sigmoid()                             #sigmoid layers
+        #self.sig = nn.Sigmoid()                             #sigmoid layers
         
     
     def forward(self, nn_input, hidden):
@@ -388,7 +388,7 @@ class RNN(nn.Module):
         
         out = r_output.contiguous().view(-1, self.hidden_dim )# Stack up LSTM outputs using view# you may need to use contiguous to reshape the output
         sig_out = self.fc(out)##  put x(input) through the fully-connected layer
-        
+        #sig_out=out
         # reshape into (batch_size, seq_length, output_size)
         #sig_out = out.view(batch_size, -1, self.output_size)
         sig_out = sig_out.view(batch_size, -1, self.output_size)
@@ -571,7 +571,7 @@ train_loader = batch_data(int_text, sequence_length, batch_size)
 
 # Training parameters
 # Number of Epochs
-num_epochs = 5
+num_epochs = 10
 # Learning Rate
 learning_rate = 0.001
 
@@ -588,7 +588,7 @@ hidden_dim = 300
 n_layers = 3
 
 # Show stats for every n number of batches
-show_every_n_batches = 500
+show_every_n_batches = 1000
 
 
 # ### Train
@@ -628,13 +628,15 @@ print('Model Trained and Saved')
 # when i put 
 # vocab_size equal len(vocab_to_int)
 # 
-# hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy but not too much for not overfitting.
+# hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy but not too much for not overfitting. (no best value here)
 # 
-# n_layers i use 3 layers as will outperform a tow layer net ( if number layers less it much fuster expet CNN)
+# n_layers :i use 3 layers as will outperform a tow layer net ( its the best value)
 # 
 #  sequence_length : i reduce  for fasting the tratinig
-#  bach size: reduceing for reduce loss and raise accuracy
-#  i increase learning rate for more eccuracy
+#  
+#  bach size: reduceing for reduce loss and raise accuracy(no best value here)
+#  
+#  learning rate :i reduce it for more eccuracy(but it shouldn’t be too large)
 #  
 
 # ---

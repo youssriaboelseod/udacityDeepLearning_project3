@@ -13576,7 +13576,7 @@ sequence_length = 4</code></pre>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;torch.utils.data.dataloader.DataLoader at 0x7fa628716208&gt;</pre>
+<pre>&lt;torch.utils.data.dataloader.DataLoader at 0x7fc2acdbd278&gt;</pre>
 </div>
 
 </div>
@@ -13723,7 +13723,7 @@ out = output[:, -1]</code></pre>
         <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lstm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">,</span> 
                             <span class="n">dropout</span><span class="o">=</span><span class="n">dropout</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>        <span class="c1"># dropout layer</span>
+        <span class="c1">#self.dropout = nn.Dropout(0.3)        # dropout layer</span>
 
         <span class="c1"># set class variables</span>
         <span class="c1">#self.chars = vocab_size</span>
@@ -13731,7 +13731,7 @@ out = output[:, -1]</code></pre>
         <span class="c1">#self.char2int = {ch: ii for ii, ch in self.int2char.items()}</span>
         <span class="c1"># define model layers</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_size</span><span class="p">)</span>        <span class="c1"># linear </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sig</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">()</span>                             <span class="c1">#sigmoid layers</span>
+        <span class="c1">#self.sig = nn.Sigmoid()                             #sigmoid layers</span>
         
     
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nn_input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">):</span>
@@ -13752,7 +13752,7 @@ out = output[:, -1]</code></pre>
         
         <span class="n">out</span> <span class="o">=</span> <span class="n">r_output</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_dim</span> <span class="p">)</span><span class="c1"># Stack up LSTM outputs using view# you may need to use contiguous to reshape the output</span>
         <span class="n">sig_out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="c1">##  put x(input) through the fully-connected layer</span>
-        
+        <span class="c1">#sig_out=out</span>
         <span class="c1"># reshape into (batch_size, seq_length, output_size)</span>
         <span class="c1">#sig_out = out.view(batch_size, -1, self.output_size)</span>
         <span class="n">sig_out</span> <span class="o">=</span> <span class="n">sig_out</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_size</span><span class="p">)</span>
@@ -14006,7 +14006,7 @@ out = output[:, -1]</code></pre>
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Training parameters</span>
 <span class="c1"># Number of Epochs</span>
-<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="c1"># Learning Rate</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
 
@@ -14023,7 +14023,7 @@ out = output[:, -1]</code></pre>
 <span class="n">n_layers</span> <span class="o">=</span> <span class="mi">3</span>
 
 <span class="c1"># Show stats for every n number of batches</span>
-<span class="n">show_every_n_batches</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">show_every_n_batches</span> <span class="o">=</span> <span class="mi">1000</span>
 </pre></div>
 
     </div>
@@ -14082,86 +14082,86 @@ out = output[:, -1]</code></pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training for 5 epoch(s)...
-Epoch:    1/5     Loss: 5.909010098457337
+<pre>Training for 10 epoch(s)...
+Epoch:    1/10    Loss: 5.808836177825928
 
-Epoch:    1/5     Loss: 5.713744568824768
+Epoch:    1/10    Loss: 5.770952031612397
 
-Epoch:    1/5     Loss: 5.726746096611023
+Epoch:    1/10    Loss: 5.29177312040329
 
-Epoch:    1/5     Loss: 5.808293230056763
+Epoch:    1/10    Loss: 4.671103951215744
 
-Epoch:    1/5     Loss: 5.799638630867005
+Epoch:    2/10    Loss: 4.382948416553131
 
-Epoch:    1/5     Loss: 5.714971304893494
+Epoch:    2/10    Loss: 4.240608947277069
 
-Epoch:    1/5     Loss: 5.241669043540955
+Epoch:    2/10    Loss: 4.103333241701126
 
-Epoch:    1/5     Loss: 4.845693409919739
+Epoch:    2/10    Loss: 4.080638859272003
 
-Epoch:    2/5     Loss: 4.555456062903007
+Epoch:    3/10    Loss: 3.986224267580738
 
-Epoch:    2/5     Loss: 4.314826137542725
+Epoch:    3/10    Loss: 3.9209645738601684
 
-Epoch:    2/5     Loss: 4.274606697082519
+Epoch:    3/10    Loss: 3.8340556132793426
 
-Epoch:    2/5     Loss: 4.32646410036087
+Epoch:    3/10    Loss: 3.8579432373046876
 
-Epoch:    2/5     Loss: 4.23208572101593
+Epoch:    4/10    Loss: 3.7793105117262225
 
-Epoch:    2/5     Loss: 4.1392346606254575
+Epoch:    4/10    Loss: 3.7384330024719237
 
-Epoch:    2/5     Loss: 4.109307557582855
+Epoch:    4/10    Loss: 3.6481493561267855
 
-Epoch:    2/5     Loss: 4.145636974334717
+Epoch:    4/10    Loss: 3.698090669631958
 
-Epoch:    3/5     Loss: 4.05927559658885
+Epoch:    5/10    Loss: 3.6343697765102125
 
-Epoch:    3/5     Loss: 3.926067983150482
+Epoch:    5/10    Loss: 3.5940310513973235
 
-Epoch:    3/5     Loss: 3.940105939388275
+Epoch:    5/10    Loss: 3.5124545404911043
 
-Epoch:    3/5     Loss: 3.9904336614608766
+Epoch:    5/10    Loss: 3.5755082693099975
 
-Epoch:    3/5     Loss: 3.912653787612915
+Epoch:    6/10    Loss: 3.527618736763523
 
-Epoch:    3/5     Loss: 3.8662094745635986
+Epoch:    6/10    Loss: 3.492864129304886
 
-Epoch:    3/5     Loss: 3.8421410012245176
+Epoch:    6/10    Loss: 3.418653825044632
 
-Epoch:    3/5     Loss: 3.896957486629486
+Epoch:    6/10    Loss: 3.4798633608818053
 
-Epoch:    4/5     Loss: 3.8305867622296015
+Epoch:    7/10    Loss: 3.4379712072137285
 
-Epoch:    4/5     Loss: 3.724542489528656
+Epoch:    7/10    Loss: 3.4046829326152803
 
-Epoch:    4/5     Loss: 3.7293193969726564
+Epoch:    7/10    Loss: 3.337872090816498
 
-Epoch:    4/5     Loss: 3.785373023509979
+Epoch:    7/10    Loss: 3.4017954483032224
 
-Epoch:    4/5     Loss: 3.7223036384582517
+Epoch:    8/10    Loss: 3.3671753450615767
 
-Epoch:    4/5     Loss: 3.665317533493042
+Epoch:    8/10    Loss: 3.3372667450904845
 
-Epoch:    4/5     Loss: 3.6717511157989504
+Epoch:    8/10    Loss: 3.2712749412059785
 
-Epoch:    4/5     Loss: 3.714954087734222
+Epoch:    8/10    Loss: 3.3423393864631654
 
-Epoch:    5/5     Loss: 3.6699884831905365
+Epoch:    9/10    Loss: 3.305119448491972
 
-Epoch:    5/5     Loss: 3.5794230318069458
+Epoch:    9/10    Loss: 3.2808288826942444
 
-Epoch:    5/5     Loss: 3.584567624568939
+Epoch:    9/10    Loss: 3.2138831961154937
 
-Epoch:    5/5     Loss: 3.6417084407806395
+Epoch:    9/10    Loss: 3.2827796609401703
 
-Epoch:    5/5     Loss: 3.583541358470917
+Epoch:   10/10    Loss: 3.253008118394303
 
-Epoch:    5/5     Loss: 3.5343609805107117
+Epoch:   10/10    Loss: 3.22671203827858
 
-Epoch:    5/5     Loss: 3.5404547777175903
+Epoch:   10/10    Loss: 3.171477886199951
 
-Epoch:    5/5     Loss: 3.589859797000885
+Epoch:   10/10    Loss: 3.2335320267677305
 
 </pre>
 </div>
@@ -14208,11 +14208,11 @@ Epoch:    5/5     Loss: 3.589859797000885
 <p><strong>Answer:</strong> (Write answer, here)
 when i put 
 vocab_size equal len(vocab_to_int)</p>
-<p>hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy but not too much for not overfitting.</p>
-<p>n_layers i use 3 layers as will outperform a tow layer net ( if number layers less it much fuster expet CNN)</p>
-<p>sequence_length : i reduce  for fasting the tratinig
- bach size: reduceing for reduce loss and raise accuracy
- i increase learning rate for more eccuracy</p>
+<p>hidden_dim : i select it as duble size of embaddin dinmetion for more eccuracy but not too much for not overfitting. (no best value here)</p>
+<p>n_layers :i use 3 layers as will outperform a tow layer net ( its the best value)</p>
+<p>sequence_length : i reduce  for fasting the tratinig</p>
+<p>bach size: reduceing for reduce loss and raise accuracy(no best value here)</p>
+<p>learning rate :i reduce it for more eccuracy(but it shouldn’t be too large)</p>
 
 </div>
 </div>
@@ -14393,73 +14393,65 @@ vocab_size equal len(vocab_to_int)</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>jerry: the network of the manner. i think you were a little contractor.
+<pre>jerry: it&#39;s just a good time.
+
+jerry: i think it&#39;s a new time to be.
+
+elaine: you know, i can&#39;t go out to the actual party.
+
+george: i think i could go. i don&#39;t know.
+
+george: well, i think we were going to see you.
+
+hoyt: yes.
+
+jerry: oh, yeah?
+
+george: i think i was going to get out of this, but i&#39;m not going to be in california, and i want you to come out of this, but we could get a new one number, we were in puerto... it&#39;s a real.
+
+george: i think it&#39;s a crime. i know what i want.
+
+kramer: oh, no, no, i&#39;m not going on.
 
 hoyt: so what?
 
-jerry: i think it&#39;s the way of the defendants.
+elaine: yes, it&#39;s the only thing to go.
 
-jerry: you were a little good, and you could be in that courtroom.
+hoyt: you don&#39;t have to get this thing to be a little premature!
 
-george: so you were in the plane, i don&#39;t have any trouble.
+jerry: well, i guess you could go anywhere, jerry.
 
-hoyt: well, you can get the money.
+kruger: i can&#39;t believe it.
 
-jerry: i can&#39;t have to get it in the street, and i was going on to get a whole one. i mean, you can be a little festive and a little good?
+jerry: what?
 
-jerry: no no, i can&#39;t get out with that.
+kramer: well, you have a fax of a fax. i got to get out of this, and now we&#39;re not going to be in here and now if they can go.
 
-hoyt: i was in the bathroom!
+george: what is the problem?
 
-george: so what did i do?
+kruger: i don&#39;t know. i think i&#39;m getting a nap for this thing.
 
-george: i told you, i think it&#39;s the same time.
+chiles: i know.
 
-chiles: i think we were the good time.
+hoyt: you don&#39;t know what they do.
 
-george: what happened, i can&#39;t go anywhere, and the whole one would be a man of the time.
+jerry: well, what is this?
 
-chiles: oh, yeah.
+kruger: it&#39;s an way.
 
-hoyt: so?
+kruger: i don&#39;t want any money.
 
-elaine: i know. i got it in that courtroom.
+george: i know.
 
-hoyt: so, you know, i can&#39;t get that.
+elaine: oh, i can&#39;t believe that. i&#39;m not a good time. it&#39;s a misprint, and then i want to get a break of the way to the stand.
 
-elaine: you know how you&#39;re going to do?
+jerry: you know what happened to the plane.
 
-jerry: no, it&#39;s a good thing i was a little adjustment.
+george: i thought he was the best.
 
-hoyt: what?
+kramer: yeah, that&#39;s the most important monkey.
 
-george: i think it&#39;s effeminate.
-
-jerry: you know, i have to be a little adjustment about this courtroom.
-
-hoyt: what did you want to do?
-
-hoyt: i don&#39;t care.
-
-elaine: oh, that&#39;s right.
-
-hoyt: what are we doing here?
-
-hoyt: what?
-
-jerry: i told you about the defendants.
-
-george: you know, i was going to get the whole time in the phone.
-
-hoyt: i think it would be a good one.
-
-[new witness: the coffee shop]
-
-hoyt: yes, i think i can get out of that courtroom.
-
-jerry: so, what is this?
-
-elaine:
+elaine: i can&#39;t get a nap?
 </pre>
 </div>
 </div>
